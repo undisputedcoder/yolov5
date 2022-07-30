@@ -14,16 +14,16 @@ if uploaded_file is None:
     st.warning("No file has been uploaded.")
     st.stop()
 else:
-    if os.path.exists('yolov5/runs/detect/exp'):
-        os.rmdir('yolov5/runs/detect/exp')
+    if os.path.exists('runs/detect/exp'):
+        os.rmdir('runs/detect/exp')
 
     image = Image.open(uploaded_file).convert("RGB")
     filename = str(uploaded_file.name)
     image = image.save(filename)
 
-detect.run(weights='yolov5/runs/train/exp2/weights/best.pt', conf_thres=0.1, source=filename)
+detect.run(weights='runs/train/exp2/weights/best.pt', conf_thres=0.1, source=filename)
 
-st.image('yolov5/runs/detect/exp/' + filename)
+st.image('runs/detect/exp/' + filename)
 
 os.remove(filename)
-os.remove('yolov5/runs/detect/exp/' + filename)
+os.remove('runs/detect/exp/' + filename)
